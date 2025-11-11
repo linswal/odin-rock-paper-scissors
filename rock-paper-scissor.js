@@ -45,20 +45,20 @@ const playGame = () => {
         };
     };
     
-    for (let i = 0; i < 5; i++) {
-        playRound(getHumanChoice(), getComputerChoice());
-        console.log(`Your score is ${humanScore} and the computer score is ${computerScore}.`);
-    };   
+    // for (let i = 0; i < 5; i++) {
+    //     playRound(getHumanChoice(), getComputerChoice());
+    //     console.log(`Your score is ${humanScore} and the computer score is ${computerScore}.`);
+    // };   
     
-    if (humanScore > computerScore) {
-        console.log(`You win the game! Your final score is ${humanScore}.`);
-        console.log(`The computer score is ${computerScore}.`);
-    } else if (computerScore > humanScore) {
-        console.log(`You lost the game! Your final score is ${humanScore}.`);
-        console.log(`The computer score is ${computerScore}.`);
-    } else {
-        console.log(`You tied with the computer at a final score of ${humanScore}.`);
-    };
+    // if (humanScore > computerScore) {
+    //     console.log(`You win the game! Your final score is ${humanScore}.`);
+    //     console.log(`The computer score is ${computerScore}.`);
+    // } else if (computerScore > humanScore) {
+    //     console.log(`You lost the game! Your final score is ${humanScore}.`);
+    //     console.log(`The computer score is ${computerScore}.`);
+    // } else {
+    //     console.log(`You tied with the computer at a final score of ${humanScore}.`);
+    // };
 };
 
 
