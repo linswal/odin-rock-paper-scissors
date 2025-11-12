@@ -1,49 +1,45 @@
 /**
- * Simulates a of game of rock, paper, scissors based humanChoice and
+ * Simulates a of round of rock, paper, scissors based humanChoice and
  * computerChoice. Prints the win or lose condition for the human. 
  * 
  * @param {string} humanChoice - rock, paper, or scissors chosen by human.
  * @param {string} computerChoice - rock, paper, or scissors chosen by comp.
-*/
-const playGame = () => {
-    let humanScore = 0;
-    let computerScore = 0;
+*/ 
+function playRound(humanChoice, computerChoice) {
+    let humanChoiceCapitalized = humanChoice[0].toUpperCase() + humanChoice.slice(1);
     
-    const playRound = (humanChoice, computerChoice) => {
-        let humanChoiceCapitalized = humanChoice[0].toUpperCase() + humanChoice.slice(1);
-        
-        if (humanChoiceCapitalized === "Rock") {
-            if (computerChoice === "Scissors") {
-                console.log(`You win! ${humanChoiceCapitalized} beats ${computerChoice}`);
-                humanScore++;
-            } else if (computerChoice === "Paper") {
-                console.log(`You lose! ${humanChoiceCapitalized} loses to ${computerChoice}`);
-                computerScore++;
-            } else {
-                console.log(`You draw! ${humanChoiceCapitalized} ties with ${computerChoice}`);
-            };
-        } else if (humanChoiceCapitalized === "Paper") {
-            if (computerChoice === "Rock") {
-                console.log(`You win! ${humanChoiceCapitalized} beats ${computerChoice}`);
-                humanScore++;
-            } else if (computerChoice === "Scissors") {
-                console.log(`You lose! ${humanChoiceCapitalized} loses to ${computerChoice}`);
-                computerScore++;
-            } else {
-                console.log(`You draw! ${humanChoiceCapitalized} ties with ${computerChoice}`);
-            };
+    if (humanChoiceCapitalized === "Rock") {
+        if (computerChoice === "Scissors") {
+            console.log(`You win! ${humanChoiceCapitalized} beats ${computerChoice}`);
+            humanScore++;
+        } else if (computerChoice === "Paper") {
+            console.log(`You lose! ${humanChoiceCapitalized} loses to ${computerChoice}`);
+            computerScore++;
         } else {
-            if (computerChoice === "Paper") {
-                console.log(`You win! ${humanChoiceCapitalized} beats ${computerChoice}`);
-                humanScore++;
-            } else if (computerChoice === "Rock") {
-                console.log(`You lose! ${humanChoiceCapitalized} loses to ${computerChoice}`);
-                computerScore++;
-            } else {
-                console.log(`You draw! ${humanChoiceCapitalized} ties with ${computerChoice}`);
-            };
+            console.log(`You draw! ${humanChoiceCapitalized} ties with ${computerChoice}`);
+        };
+    } else if (humanChoiceCapitalized === "Paper") {
+        if (computerChoice === "Rock") {
+            console.log(`You win! ${humanChoiceCapitalized} beats ${computerChoice}`);
+            humanScore++;
+        } else if (computerChoice === "Scissors") {
+            console.log(`You lose! ${humanChoiceCapitalized} loses to ${computerChoice}`);
+            computerScore++;
+        } else {
+            console.log(`You draw! ${humanChoiceCapitalized} ties with ${computerChoice}`);
+        };
+    } else {
+        if (computerChoice === "Paper") {
+            console.log(`You win! ${humanChoiceCapitalized} beats ${computerChoice}`);
+            humanScore++;
+        } else if (computerChoice === "Rock") {
+            console.log(`You lose! ${humanChoiceCapitalized} loses to ${computerChoice}`);
+            computerScore++;
+        } else {
+            console.log(`You draw! ${humanChoiceCapitalized} ties with ${computerChoice}`);
         };
     };
+};
     
     // for (let i = 0; i < 5; i++) {
     //     playRound(getHumanChoice(), getComputerChoice());
@@ -59,7 +55,7 @@ const playGame = () => {
     // } else {
     //     console.log(`You tied with the computer at a final score of ${humanScore}.`);
     // };
-};
+
 
 
 /**
@@ -88,4 +84,9 @@ function getHumanChoice() {
     return userAnswer;
 };
 
-playGame();
+document.addEventListener('DOMContentLoaded', () => {
+    const playerScore = document.querySelector("#player-score");
+    playerScore.textContent = "Player Score: 0";
+    const computerScore = document.querySelector("#computer-score");
+    computerScore.textContent = "Computer Score: 0";
+})
