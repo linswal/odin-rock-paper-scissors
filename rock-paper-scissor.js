@@ -63,7 +63,7 @@ function playRound(humanChoice, computerChoice) {
  * 
  * @returns {string} - one of the choices of 'Rock', 'Paper', or 'Scissors'.
  */
-function getComputerChoice() {
+function getComputerChoice() {  
     choice = Math.random();
     if (choice <= 0.3) {
         return "Rock";
@@ -74,14 +74,9 @@ function getComputerChoice() {
     };
 };
 
-/**
- * Ask user for a choice of 'rock', 'paper', or 'scissors'.
- * 
- * @returns {string} - user's choice of 'rock', 'paper', or 'scissors'.
-*/
-function getHumanChoice() {
-    userAnswer = prompt("Pick rock, paper, or scissors: ");
-    return userAnswer;
+
+function getHumanChoice(event) {
+    return event.target.id;
 };
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -89,4 +84,8 @@ document.addEventListener('DOMContentLoaded', () => {
     playerScore.textContent = "Player Score: 0";
     const computerScore = document.querySelector("#computer-score");
     computerScore.textContent = "Computer Score: 0";
+    // const rockButton = document.querySelector("#rock");
+    // rockButton.addEventListener("click", (e) => {
+    //     playRound(getHumanChoice(e), getComputerChoice())
+    // });
 })
