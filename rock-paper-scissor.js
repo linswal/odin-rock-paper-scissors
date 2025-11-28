@@ -1,42 +1,67 @@
 /**
+ * Randomly and equal select a choice between 'Rock', 'Paper', or Scissors'.
+ * 
+ * @returns {string} - one of the choices of 'Rock', 'Paper', or 'Scissors'.
+ */
+function getComputerChoice() {  
+    choice = Math.random();
+    if (choice <= 0.3) {
+        return "Rock";
+    } else if (choice >= 0.6) {
+        return "Paper";
+    } else {
+        return "Scissors";
+    }
+}
+
+
+function getHumanChoice(event) {
+    return event.target.id;
+}
+
+/**
  * Simulates a of round of rock, paper, scissors based humanChoice and
  * computerChoice. Prints the win or lose condition for the human. 
  * 
  * @param {string} humanChoice - rock, paper, or scissors chosen by human.
  * @param {string} computerChoice - rock, paper, or scissors chosen by comp.
 */ 
-function playRound(humanChoice, computerChoice) {
+const playRound = (humanChoice, computerChoice) => {
     let humanChoiceCapitalized = humanChoice[0].toUpperCase() + humanChoice.slice(1);
+
     
     if (humanChoiceCapitalized === "Rock") {
         if (computerChoice === "Scissors") {
-            console.log(`You win! ${humanChoiceCapitalized} beats ${computerChoice}`);
-            humanScore++;
+            alert(`You win! ${humanChoiceCapitalized} beats ${computerChoice}`);
+            let newScore = playerScore.textContent.slice(-1) + 1
+            playerScore.textContent.slice(-1) = newScore
         } else if (computerChoice === "Paper") {
-            console.log(`You lose! ${humanChoiceCapitalized} loses to ${computerChoice}`);
-            computerScore++;
+            alert(`You lose! ${humanChoiceCapitalized} loses to ${computerChoice}`);
+            let newScore = playerScore.textContent.slice(-1) + 1
+            playerScore.textContent.slice(-1) = newScore
         } else {
-            console.log(`You draw! ${humanChoiceCapitalized} ties with ${computerChoice}`);
+            alert(`You draw! ${humanChoiceCapitalized} ties with ${computerChoice}`);
         };
     } else if (humanChoiceCapitalized === "Paper") {
         if (computerChoice === "Rock") {
-            console.log(`You win! ${humanChoiceCapitalized} beats ${computerChoice}`);
-            humanScore++;
+            alert(`You win! ${humanChoiceCapitalized} beats ${computerChoice}`);
+            let newScore = playerScore.textContent.slice(-1) + 1
+            playerScore.textContent.slice(-1) = newScore
         } else if (computerChoice === "Scissors") {
-            console.log(`You lose! ${humanChoiceCapitalized} loses to ${computerChoice}`);
+            alert(`You lose! ${humanChoiceCapitalized} loses to ${computerChoice}`);
             computerScore++;
         } else {
-            console.log(`You draw! ${humanChoiceCapitalized} ties with ${computerChoice}`);
+            alert(`You draw! ${humanChoiceCapitalized} ties with ${computerChoice}`);
         };
     } else {
         if (computerChoice === "Paper") {
-            console.log(`You win! ${humanChoiceCapitalized} beats ${computerChoice}`);
+            alert(`You win! ${humanChoiceCapitalized} beats ${computerChoice}`);
             humanScore++;
         } else if (computerChoice === "Rock") {
-            console.log(`You lose! ${humanChoiceCapitalized} loses to ${computerChoice}`);
+            alert(`You lose! ${humanChoiceCapitalized} loses to ${computerChoice}`);
             computerScore++;
         } else {
-            console.log(`You draw! ${humanChoiceCapitalized} ties with ${computerChoice}`);
+            alert(`You draw! ${humanChoiceCapitalized} ties with ${computerChoice}`);
         };
     };
 };
@@ -58,34 +83,20 @@ function playRound(humanChoice, computerChoice) {
 
 
 
-/**
- * Randomly and equal select a choice between 'Rock', 'Paper', or Scissors'.
- * 
- * @returns {string} - one of the choices of 'Rock', 'Paper', or 'Scissors'.
- */
-function getComputerChoice() {  
-    choice = Math.random();
-    if (choice <= 0.3) {
-        return "Rock";
-    } else if (choice >= 0.6) {
-        return "Paper";
-    } else {
-        return "Scissors";
-    };
-};
-
-
-function getHumanChoice(event) {
-    return event.target.id;
-};
 
 document.addEventListener('DOMContentLoaded', () => {
     const playerScore = document.querySelector("#player-score");
-    playerScore.textContent = "Player Score: 0";
     const computerScore = document.querySelector("#computer-score");
-    computerScore.textContent = "Computer Score: 0";
-    // const rockButton = document.querySelector("#rock");
-    // rockButton.addEventListener("click", (e) => {
-    //     playRound(getHumanChoice(e), getComputerChoice())
-    // });
+    const rockButton = document.querySelector("#rock");
+    rockButton.addEventListener("click", (e) => {
+        playRound(getHumanChoice(e), getComputerChoice())
+    });
+    const paperButton = document.querySelector("#paper");
+    paperButton.addEventListener("click", (e) => {
+        playRound(getHumanChoice(e), getComputerChoice())
+    });
+    const scissorsButton = document.querySelector("#scissors");
+    scissorsButton.addEventListener("click", (e) => {
+        playRound(getHumanChoice(e), getComputerChoice())
+    });
 })
