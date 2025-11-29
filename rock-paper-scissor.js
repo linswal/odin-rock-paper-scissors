@@ -14,9 +14,25 @@ function getComputerChoice() {
     }
 }
 
-
 function getHumanChoice(event) {
     return event.target.id;
+}
+
+function printMessage(result, playerChoice, computerChoice) {
+    msg = ''
+    if (result === 'win') {
+        msg = `You win! ${playerChoice} beats ${computerChoice}.`;
+    } else if (result === 'lose') {
+        msg = `You lose! ${playerChoice} loses to ${computerChoice}.`;
+    } else {
+        msg = `You draw! ${playerChoice} ties with ${computerChoice}.`
+    }
+    message.textContent = msg;
+}
+
+function changeScore(scoreDisplay) {
+    let newScore = scoreDisplay.textContent.slice(-1) + 1
+    scoreDisplay.textContent[scoreDisplay.textContent.length - 1] = newScore
 }
 
 /**
@@ -26,67 +42,56 @@ function getHumanChoice(event) {
  * @param {string} humanChoice - rock, paper, or scissors chosen by human.
  * @param {string} computerChoice - rock, paper, or scissors chosen by comp.
 */ 
-const playRound = (humanChoice, computerChoice) => {
+function playRound (humanChoice, computerChoice) {
     let humanChoiceCapitalized = humanChoice[0].toUpperCase() + humanChoice.slice(1);
 
+    if (playerScore + computerScore === 5) {
+        let winner = 'computer'
+        if (playerScoreDisplay > computerScoreDisplay) {
+            winner = 'player'
+        }
+        msg = `Final winner is the ${winner}!`;
+    } 
     
     if (humanChoiceCapitalized === "Rock") {
         if (computerChoice === "Scissors") {
-            alert(`You win! ${humanChoiceCapitalized} beats ${computerChoice}`);
-            let newScore = playerScore.textContent.slice(-1) + 1
-            playerScore.textContent.slice(-1) = newScore
+            printMessage('win', humanChoiceCapitalized, computerChoice);
+            changeScore(playerScore);
         } else if (computerChoice === "Paper") {
-            alert(`You lose! ${humanChoiceCapitalized} loses to ${computerChoice}`);
-            let newScore = playerScore.textContent.slice(-1) + 1
-            playerScore.textContent.slice(-1) = newScore
+            printMessage('lose', humanChoiceCapitalized, computerChoice);
+            changeScore(computerScore);
         } else {
-            alert(`You draw! ${humanChoiceCapitalized} ties with ${computerChoice}`);
+            printMessage('tie', humanChoiceCapitalized, computerChoice);
         };
     } else if (humanChoiceCapitalized === "Paper") {
         if (computerChoice === "Rock") {
-            alert(`You win! ${humanChoiceCapitalized} beats ${computerChoice}`);
-            let newScore = playerScore.textContent.slice(-1) + 1
-            playerScore.textContent.slice(-1) = newScore
+            printMessage('win', humanChoiceCapitalized, computerChoice);
+            changeScore(playerScore);
         } else if (computerChoice === "Scissors") {
-            alert(`You lose! ${humanChoiceCapitalized} loses to ${computerChoice}`);
-            computerScore++;
+            printMessage('lose', humanChoiceCapitalized, computerChoice);
+            changeScore(computerScore);
         } else {
-            alert(`You draw! ${humanChoiceCapitalized} ties with ${computerChoice}`);
+            printMessage('tie', humanChoiceCapitalized, computerChoice);
         };
     } else {
         if (computerChoice === "Paper") {
-            alert(`You win! ${humanChoiceCapitalized} beats ${computerChoice}`);
-            humanScore++;
+            printMessage('win', humanChoiceCapitalized, computerChoice);
+            changeScore(playerScore);
         } else if (computerChoice === "Rock") {
-            alert(`You lose! ${humanChoiceCapitalized} loses to ${computerChoice}`);
-            computerScore++;
+            printMessage('lose', humanChoiceCapitalized, computerChoice);
+            changeScore(computerScore);
         } else {
-            alert(`You draw! ${humanChoiceCapitalized} ties with ${computerChoice}`);
+            printMessage('tie', humanChoiceCapitalized, computerChoice);
         };
     };
 };
     
-    // for (let i = 0; i < 5; i++) {
-    //     playRound(getHumanChoice(), getComputerChoice());
-    //     console.log(`Your score is ${humanScore} and the computer score is ${computerScore}.`);
-    // };   
-    
-    // if (humanScore > computerScore) {
-    //     console.log(`You win the game! Your final score is ${humanScore}.`);
-    //     console.log(`The computer score is ${computerScore}.`);
-    // } else if (computerScore > humanScore) {
-    //     console.log(`You lost the game! Your final score is ${humanScore}.`);
-    //     console.log(`The computer score is ${computerScore}.`);
-    // } else {
-    //     console.log(`You tied with the computer at a final score of ${humanScore}.`);
-    // };
-
-
-
-
 document.addEventListener('DOMContentLoaded', () => {
-    const playerScore = document.querySelector("#player-score");
-    const computerScore = document.querySelector("#computer-score");
+    let playerScore = 0;
+    let computerScore = 0;
+    const playerScoreDisplay = document.querySelector("#player-score");
+    const computerScoreDisplay = document.querySelector("#computer-score");
+    const message = document.querySelector("#message");
     const rockButton = document.querySelector("#rock");
     rockButton.addEventListener("click", (e) => {
         playRound(getHumanChoice(e), getComputerChoice())
