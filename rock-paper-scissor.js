@@ -43,37 +43,36 @@ document.addEventListener('DOMContentLoaded', () => {
         if (result === 'win') {
             msg = `You win! ${playerChoice} beats ${computerChoice}.`;
             playerScore++;
-            playerScoreDisplay.textContent[playerScoreDisplay.textContent.length - 1] = playerScore;
-        } else if (result === 'lose') {
-            msg = `You lose! ${playerChoice} loses to ${computerChoice}.`;
-            computerScore++;
-            computerScoreDisplay.textContent[computerScoreDisplay.textContent.length - 1] = computerScore;
-        } else {
-            msg = `You draw! ${playerChoice} ties with ${computerChoice}.`
+            playerScoreDisplay.textContent = 
+                playerScoreDisplay.textContent.slice(0, -1) + playerScore;
+            } else if (result === 'lose') {
+                msg = `You lose! ${playerChoice} loses to ${computerChoice}.`;
+                computerScore++;
+                computerScoreDisplay.textContent = 
+                computerScoreDisplay.textContent.slice(0, -1) + computerScore;
+            } else {
+                msg = `You draw! ${playerChoice} ties with ${computerChoice}.`
+            }
+            message.textContent = msg;
         }
-        message.textContent = msg;
-    }
-
-    /**
-     * Simulates a of round of rock, paper, scissors based humanChoice and
-     * computerChoice. 
-     * 
-     * @param {string} humanChoice - rock, paper, or scissors chosen by human.
-     * @param {string} computerChoice - rock, paper, or scissors chosen by comp.
-    */ 
+        
+        /**
+         * Simulates a of round of rock, paper, scissors based humanChoice and
+         * computerChoice. 
+         * 
+         * @param {string} humanChoice - rock, paper, or scissors chosen by human.
+         * @param {string} computerChoice - rock, paper, or scissors chosen by comp.
+        */ 
     function playRound (humanChoice, computerChoice) {
         let humanChoiceCapitalized = humanChoice[0].toUpperCase() + humanChoice.slice(1);
-
-        if (playerScore + computerScore === 5) {
-            let winner = 'computer'
-            if (playerScore > computerScore) {
-                winner = 'player'
-            }
-            msg = `Final winner is the ${winner}!`;
-            message.textContent = msg;
-            playerScore = 0;
-            computerScore = 0;
-        } 
+           
+        // Resets score display to 0
+        if (playerScore + computerScore === 0) {
+            playerScoreDisplay.textContent = 
+                playerScoreDisplay.textContent.slice(0, -1) + playerScore;
+            computerScoreDisplay.textContent = 
+                computerScoreDisplay.textContent.slice(0, -1) + computerScore;
+        }
         
         if (humanChoiceCapitalized === "Rock") {
             if (computerChoice === "Scissors") {
@@ -100,5 +99,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 updateScoreAndPrintMessage('tie', humanChoiceCapitalized, computerChoice);
             };
         };
+
+        if (playerScore + computerScore === 5) {
+            let winner = 'computer'
+            if (playerScore > computerScore) {
+                winner = 'player'
+            }
+            msg = ` Final winner is the ${winner}!`;
+            message.textContent += msg;
+            message.style.fontWeight = "bold";
+            playerScore = 0;
+            computerScore = 0;
+        } 
     };
 })
